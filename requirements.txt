@@ -1,0 +1,23 @@
+# Core dependencies
+numpy>=1.24.0
+opencv-python>=4.8.0
+torch>=2.1.0
+torchvision>=0.16.0
+
+# Detection and Segmentation
+ultralytics>=8.0.0  # YOLOv8 for detection
+segment-anything-2>=0.1.0  # SAM2/SAM3
+
+# Tracking
+supervision>=0.16.0  # ByteTrack and visualization utilities
+
+# Video processing
+av>=10.0.0  # Fast video decoding
+
+# Visualization and analysis
+matplotlib>=3.7.0
+pandas>=2.0.0
+seaborn>=0.12.0
+
+# Optional: Pose estimation
+# mediapipe>=0.10.0
