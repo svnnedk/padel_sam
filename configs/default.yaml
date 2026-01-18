@@ -1,0 +1,68 @@
+# Default configuration for Padel Match Analysis
+
+# Video processing
+video:
+  frame_interval: 1  # Process every Nth frame
+  max_frames: null   # Limit frames (null = all)
+
+# Court detection
+court:
+  detection_method: "hough"  # "hough", "color", or "manual"
+  # Pre-defined corners (optional): [top_left, top_right, bottom_right, bottom_left]
+  # corners: [[100, 200], [700, 200], [700, 600], [100, 600]]
+
+# Player detection
+player_detection:
+  model: "yolov8n.pt"  # YOLOv8 model
+  confidence_threshold: 0.5
+  classes: [0]  # COCO class 0 = person
+
+# Player tracking
+tracking:
+  tracker_type: "bytetrack"  # "bytetrack" or "simple"
+  max_age: 30  # Frames to keep track without detection
+  min_hits: 3  # Minimum detections to confirm track
+  iou_threshold: 0.3
+
+# SAM segmentation
+segmentation:
+  enabled: true
+  model_type: "sam2_hiera_tiny"  # Options: tiny, small, base_plus, large
+  # checkpoint_path: "checkpoints/sam2_hiera_tiny.pt"
+
+# Ball detection
+ball_detection:
+  method: "hybrid"  # "color", "motion", "ml", "hybrid"
+  min_radius: 5
+  max_radius: 30
+  hsv_lower: [20, 100, 100]  # Yellow ball
+  hsv_upper: [35, 255, 255]
+
+# Rally detection
+rally:
+  min_rally_frames: 30  # ~1 second at 30fps
+  idle_threshold_frames: 60  # Frames without ball = point ended
+
+# Statistics
+statistics:
+  sprint_threshold_ms: 4.0  # Speed threshold for sprint (m/s)
+
+# Visualization
+visualization:
+  show_masks: true
+  show_trajectories: true
+  show_minimap: true
+  minimap_position: "bottom_right"
+  team_colors:
+    near: [0, 255, 0]  # Green
+    far: [0, 0, 255]   # Red
+
+# Output
+output:
+  directory: "outputs"
+  save_video: true
+  save_statistics: true
+  save_heatmaps: true
+
+# Hardware
+device: "auto"  # "auto", "cuda", "cpu"
